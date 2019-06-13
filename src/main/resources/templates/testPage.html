@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Business Profiles</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Theme personalized -->
+    <link rel="stylesheet" type="text/css" href="../static/css/myStyle.css"
+          th:href="@{/css/myStyle.css}"/>
+</head>
+<body>
+    <div class="container spacer">
+        <div class="well col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-4" >
+                    <h5>Create Business Profile</h5>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-12">
+                        <form th:action="@{testSave}" method="post" th:object="${businessProfile}">
+                            <div class="form-group">
+                                <label class="control-label">Label</label>
+                                <input type="text" th:field="*{label}" class="form-control" id="inputBpLabel" placeholder="Access to MDS/OPS/..."/>
+                                <span></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Code</label>
+                                <input type="text" th:field="*{code}" class="form-control" id="inputBpCode" placeholder="FLD-HLD_MDS_OPS_..."/>
+                                <span></span>
+                            </div>
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="reset" class="btn btn-primary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

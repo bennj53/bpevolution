@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Details of Business Profiles</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/myStyle.css"
+          th:href="@{/css/myStyle.css}"/>
+</head>
+<body>
+    <div class="container spacer">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Business Profile Code</th><th>Business Profile Label</th><th>Application Label</th>
+            </tr>
+          </thead>
+          <tbody>
+              <div th:each="bpKey:${setKeys}" >
+                 <div th:each="appCurrent:${mapBpApp.get(bpKey)}">
+                     <tr>
+                         <td th:text="${bpKey.code}"></td>
+                         <td th:text="${bpKey.label}"></td>
+                         <td th:text="${appCurrent.label}"></td>
+                    </tr>
+                 </div>
+              </div>
+          </tbody>
+      </table>
+    </div>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li th:each="p:${pagesTab}" class="nav-item">
+                <a th:text="${p}" th:href="@{Detail(page=${p})}" th:class="${p==currentPage}?'nav-link active':'nav-link'"></a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

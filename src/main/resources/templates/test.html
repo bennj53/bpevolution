@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+    <!--<link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-combobox.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="/js/bootstrap-combobox.js"></script>-->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.css" rel="stylesheet"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.min.js"></script>
+
+</head>
+<body>
+<div class="col-sm-12">
+    <span>A6. Geslacht</span>
+
+    <select id="input-A06" class="combobox form-control" style="display: none;">
+        <option value=""></option>
+        <option value="1">M</option>
+        <option value="2">V</option>
+        <option value="2">Vahala</option>
+        <option value="2">Armivier</option>
+    </select>
+</div>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open Add Application modal
+</button>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Modal body..allApplicationList
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span>Application Label</span>
+
+                        <select id="input-A08" class="combobox form-control" style="display: none;">
+                            <option value=""></option>
+                            <option th:each="appli:${allApplicationList}" th:value="${appli.id}" th:text="${appli.label}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span>Application Code</span>
+
+                        <select id="input-A09" class="combobox form-control" style="display: none;">
+                            <option value=""></option>
+                            <option th:each="appli:${allApplicationList}" th:value="${appli.id}" th:text="${appli.code}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <!--onclick="appel script javascript qui appelera method du controller pour sauver en base puis fermera la popup après réponse du controller"
+                <button title="clickMe" type="submit" class="btn btn-primary" data-dismiss="modal">Test</button>-->
+                <input id="clickMe" class="btn btn-primary" type="button" value="Save"/>
+                <input id="clickMe2" class="btn btn-primary" type="button" value="Save2"/>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="testHttp">Send an HTTP GET request to a page and get the result back</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$('.combobox').combobox()
+
+//- Using an anonymous function:
+document.getElementById("clickMe").onclick = function(){ alert('hello!'); };
+
+//or using jquery
+$("#clickMe2").bind('click', function () { alert('hello!'); });
+
+//
+
+$(document).ready(function(){
+  $("#testHttp").click(function(){
+    var idA = document.getElementById("input-A08").value
+    var idB =
+    $.get("addAppToBp",
+            {applicationId: idA,businessId: idB},
+            function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            }
+          );
+  });
+});
+
+</script>
+</body>
+</html>

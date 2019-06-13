@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Business Profiles</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../static/css/bootstrap-combobox.css" rel="stylesheet" th:href="@{/css/bootstrap-combobox.css}"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Theme personalized -->
+    <link rel="stylesheet" type="text/css" href="../static/css/myStyle.css"
+          th:href="@{/css/myStyle.css}"/>
+
+    <!--<script type="text/javascript" src="/js/bootstrap-combobox.js"></script>-->
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.css" rel="stylesheet"/>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.min.js"></script>
+
+</head>
+<body>
+<div class="container spacer">
+    <div class="well col-md-6 col-md-offset-3">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-4" >
+                <h2>Business Profile</h2>
+                <div class="form-group">
+                    <label class="control-label">Label</label>
+                    <input th:value="${businessProfile.label}" readonly/>
+                    <label class="control-label">Code</label>
+                    <input th:value="${businessProfile.code}" readonly/>
+                    <input id="idCurrentBp" th:value="${businessProfile.id}" readonly hidden/>
+                    <!--<input th:value="${businessProfile.applicationList}" readonly/-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th> <th>Code</th><th>Label</th><th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="app:${businessProfile.applicationList}">
+                        <td th:text="${app.id}"></td>
+                        <td th:text="${app.code}"></td>
+                        <td th:text="${app.label}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="container spacer">
+            <div class="row">
+                <div class="col-md-3  col-md-offset-1">
+                    <span>Application Code</span>
+
+                    <select id="input-A06" class="combobox form-control" style="display: none;">
+                        <option value=""></option>
+                        <option th:each="appli:${businessProfile.applicationList}" th:value="${appli.id}" th:text="${appli.code}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3  col-md-offset-1">
+                    <span>Application Label</span>
+
+                    <select id="input-A07" class="combobox form-control" style="display: none;">
+                        <option value=""></option>
+                        <option th:each="appli:${businessProfile.applicationList}" th:value="${appli.id}" th:text="${appli.label}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="container spacer">
+                <div class="col-md-4  col-md-offset-2">
+                    <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Add Application
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Modal body..allApplicationList
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span>Application Label</span>
+
+                        <select id="input-A08" class="combobox form-control" style="display: none;">
+                            <option value=""></option>
+                            <option th:each="appli:${allApplicationList}" th:value="${appli.id}" th:text="${appli.label}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span>Application Code</span>
+
+                        <select id="input-A09" class="combobox form-control" style="display: none;">
+                            <option value=""></option>
+                            <option th:each="appli:${allApplicationList}" th:value="${appli.id}" th:text="${appli.code}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <!--onclick="appel script javascript qui appelera method du controller pour sauver en base puis fermera la popup après réponse du controller"
+                <button title="clickMe" type="submit" class="btn btn-primary" data-dismiss="modal">Test</button>-->
+                <button id="clickMe" class="btn btn-primary" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$('.combobox').combobox();
+
+var idA = null;
+var idB = document.getElementById("idCurrentBp").value;
+
+document.getElementById("input-A08").onchange = function() {
+   idA = this.value;
+};
+
+$(document).ready(function(){
+  $("#clickMe").click(function(){
+       //alert('idA : ' + idA + ' idB : ' + idB);
+      if(idA !== '' && idA !== null && idB !== '' && idB !== null){
+        $.get("addAppToBp",
+                {applicationId: idA,businessId: idB},
+                function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                }
+              );
+      }
+  });
+});
+
+//- Using an anonymous function:
+//document.getElementById("clickMe").onclick = function(){ alert('hello!'); };
+
+//or using jquery
+//$("#clickMe").bind('click', function () {
+//alert('idA : ' + idA + ' idB : ' + idB); });
+
+
+
+</script>
+
+</body>
+</html>
