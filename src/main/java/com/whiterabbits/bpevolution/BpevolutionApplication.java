@@ -1,3 +1,5 @@
+
+
 package com.whiterabbits.bpevolution;
 
 import com.whiterabbits.bpevolution.dao.AccessRightRepository;
@@ -21,7 +23,7 @@ public class BpevolutionApplication {
 		ApplicationRepository applicationDao = context.getBean(ApplicationRepository.class);
 		AccessRightRepository accessDao = context.getBean(AccessRightRepository.class);
 
-		BusinessProfile bp1 = new BusinessProfile("BPLabel1", "BPCode1");
+	/*	BusinessProfile bp1 = new BusinessProfile("BPLabel1", "BPCode1");
 		BusinessProfile bp2 = new BusinessProfile("BPLabel2", "BPCode2");
 		BusinessProfile bp3 = new BusinessProfile("BPLabel3", "BPCode3");
 		BusinessProfile bp11 = new BusinessProfile("BPLabel11", "BPCode11");
@@ -90,15 +92,53 @@ public class BpevolutionApplication {
 		applicationList.add(app2);
 		applicationList.add(app3);
 		applicationList.add(app4);
-		applicationDao.saveAll(applicationList);
+		applicationDao.saveAll(applicationList);*/
 
-		AccessRight ri1 = new AccessRight("AccessRightLabel1" , "ACCESSCODE1");
-		app1.getAccessRightList().add(ri1);
-		ri1.setApplication(app1);
+		AccessRight ri1;
+		Application app;
+		BusinessProfile bp;
+		Set<Application> application_List = new HashSet<>();
+		int cpt = 0;
 
-		applicationDao.save(app1);
-		accessDao.save(ri1);
+		for (int j=1;j<=10;j++) {
+			bp = new BusinessProfile("BPLabel"+j, "BPCode"+j);
+			for (int i = 1; i <= 10; i++) {
+				cpt ++;
+				app = new Application("ApplicationLabel" + i + cpt, "APPCODE" + i + cpt);
+				bp.getApplicationList().add(app);
+				app.getBusinessProfile().add(bp);
+				//application_List.add(app);
 
+				for (int k = 1; k <= 10; k++) {
+
+					ri1 = new AccessRight("AccessRightLabel" + k + cpt, "ACCESSCODE" + k + cpt);
+
+					app.getAccessRightList().add(ri1);
+					ri1.setApplication(app);
+
+					applicationDao.save(app);
+					accessDao.save(ri1);
+
+				}
+				System.out.println("//////////////////////////////////////////");
+			}
+			System.out.println(bp.toString());
+			businessProfileDao.save(bp);
+			//applicationDao.saveAll(application_List);
+		}
+
+/*		for (Application appCourante : application_List) {
+			for (int i = 1; i <= 1; i++) {
+
+				ri1 = new AccessRight("AccessRightLabel" + i, "ACCESSCODE" + i);
+
+				appCourante.getAccessRightList().add(ri1);
+				ri1.setApplication(appCourante);
+
+				accessDao.save(ri1);
+				applicationDao.save(appCourante);
+			}
+		}*/
 	}
 
 }

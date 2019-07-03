@@ -36,7 +36,7 @@ public class AccessRight {
     //@OneToOne
     //@JoinColumn(name="id_Application")
     @ManyToOne()
-    @JoinColumn(name="id_Application", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name="id_Application", referencedColumnName = "id", insertable = false, updatable = true)
     private Application application;
 
     public AccessRight(String label, String code){
