@@ -8,6 +8,7 @@ import com.whiterabbits.bpevolution.dao.BusinessProfileRepository;
 import com.whiterabbits.bpevolution.entities.AccessRight;
 import com.whiterabbits.bpevolution.entities.Application;
 import com.whiterabbits.bpevolution.entities.BusinessProfile;
+import net.bytebuddy.asm.Advice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -100,30 +101,39 @@ public class BpevolutionApplication {
 		Set<Application> application_List = new HashSet<>();
 		int cpt = 0;
 
-		for (int j=1;j<=10;j++) {
+		for (int j=1;j<=2;j++) {
 			bp = new BusinessProfile("BPLabel"+j, "BPCode"+j);
-			for (int i = 1; i <= 10; i++) {
-				cpt ++;
-				app = new Application("ApplicationLabel" + i + cpt, "APPCODE" + i + cpt);
+			bp=businessProfileDao.save(bp);
+			for (int i = 1; i <= 20; i++) {
+				cpt++;
+				app = new Application("ApplicationLabel" + cpt, "APPCODE" + cpt);
+				app = applicationDao.save(app);
 				bp.getApplicationList().add(app);
 				app.getBusinessProfile().add(bp);
+				//bp = businessProfileDao.save(bp);
+
+				bp = businessProfileDao.save(bp);
+				//app = applicationDao.save(app);
 				//application_List.add(app);
 
-				for (int k = 1; k <= 10; k++) {
+				for (int k = 1; k <= 200; k++) {
 
-					ri1 = new AccessRight("AccessRightLabel" + k + cpt, "ACCESSCODE" + k + cpt);
+					ri1 = new AccessRight("AccessRightLabel" + k, "ACCESSCODE" + k );
+					ri1 = accessDao.save(ri1);
 
 					app.getAccessRightList().add(ri1);
 					ri1.setApplication(app);
 
-					applicationDao.save(app);
-					accessDao.save(ri1);
+					app = applicationDao.save(app);
+					//app = applicationDao.save(app);
+					//ri1 = accessDao.save(ri1);
 
 				}
+				//bp = businessProfileDao.save(bp);
 				System.out.println("//////////////////////////////////////////");
 			}
 			System.out.println(bp.toString());
-			businessProfileDao.save(bp);
+
 			//applicationDao.saveAll(application_List);
 		}
 
