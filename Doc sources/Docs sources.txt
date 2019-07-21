@@ -69,3 +69,7 @@ https://stackoverflow.com/questions/1947263/using-an-html-button-to-call-a-javas
 
 -Ajax, call java function from javascirpt
 https://www.programmergate.com/pass-data-javascript-servlet/
+
+-Spring Security, Spring MVC
+	.Mohamed Youssfi (Securité des application Web avec Spring Security, Spring MVC coté serveur avec Thymeleaf Gestion des Etudiants)
+	.https://blog.invivoo.com/securiser-application-spring-boot-spring-security/

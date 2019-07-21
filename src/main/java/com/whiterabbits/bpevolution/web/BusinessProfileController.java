@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping(value="/Bp")
@@ -85,22 +87,27 @@ public class BusinessProfileController {
         return "businessProfilesDetail";
     }
 
+    @Secured(value={"ROLE_ADMIN"})
     @RequestMapping(value="/CreateBP", method = RequestMethod.GET)
     public String createBusinessProfile(Model model){
         model.addAttribute("businessProfile",new BusinessProfile());
         return "businessProfilesCreate";
     }
+
+    @Secured(value={"ROLE_ADMIN"})
     @RequestMapping(value="/SaveBP", method = RequestMethod.POST, params = "action=save")
     public String saveBusinessProfile(BusinessProfile businessProfile){
         bpRepository.save(businessProfile);
         return "redirect:Index";
     }
 
+    @Secured(value={"ROLE_ADMIN"})
     @RequestMapping(value="/SaveBP", method = RequestMethod.POST, params = "action=cancel")
     public String cancelBusinessProfile(BusinessProfile businessProfile){
         return "redirect:Index";
     }
 
+    @Secured(value={"ROLE_ADMIN"})
     @RequestMapping(value="/ModifyBP", method = RequestMethod.GET)
     public String modifyBusinessProfile(Model model,@RequestParam(name="businessProfileId")Long id){
         System.out.println("businessProfile ::::: " + id );//+ " " + code + " " + label);
@@ -119,6 +126,7 @@ public class BusinessProfileController {
         return "businessProfilesModify";
     }
 
+    @Secured(value={"ROLE_ADMIN"})
     @RequestMapping(value="/addAppToBp", method = RequestMethod.GET)
     public @ResponseBody
     String addApplicationToBp(Model model,
