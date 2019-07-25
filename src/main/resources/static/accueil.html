@@ -94,11 +94,22 @@ header{
     <p>ACDC pour bien démarrer, continuer ou finir la journée.</p>
     <button id="myBtn" onclick="myFunction()">Pause</button>
     <button id="myBton" onclick="unmuteButton()">Sound</button>
+
+    <figure>
+        <figcaption>Listen to the T-Rex:</figcaption>
+        <audio id="myAudio" autoplay loop
+                controls
+                src="bensound-evolution.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+    </figure>
 </div>
 
 <script>
 var video = document.getElementById("myVideo");
 var btn = document.getElementById("myBtn");
+var audio = document.getElementById("myAudio");
 
 function myFunction() {
   if (video.paused) {
@@ -117,6 +128,16 @@ function unmuteButton() {
         video.muted = true;
     }
 }
+
+function playSound(){
+    if(audio.paused){
+        audio.play();
+    }else{
+        audio.pause();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', playSound, false);
 </script>
 
 </body>

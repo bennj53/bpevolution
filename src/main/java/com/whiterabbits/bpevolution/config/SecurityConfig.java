@@ -39,36 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         System.out.println();
     }
 
-//    @Override
-//    protected  void configure(HttpSecurity http) throws Exception{
-//        http    /*//toute les requetes demande d etre autentifié
-//                .authorizeRequests()
-//                    .anyRequest()
-//                        .authenticated()
-//                            .and()
-//                //et donne accès au formulaire de connexion
-//                .formLogin()
-//                    //page interprètée côté serveur
-//                    .loginPage("/login")
-//                    .permitAll()
-//                //page static envoyée tel quel côté client
-//                .defaultSuccessUrl("/index.html");*/
-//        .authorizeRequests().antMatchers("/").permitAll().and()
-//                .authorizeRequests().antMatchers("/console/**").permitAll()
-//                .and()
-//                //et donne accès au formulaire de connexion
-//                .formLogin()
-//                //page interprètée côté serveur
-//                .loginPage("/login")
-//                .permitAll()
-//                //page static envoyée tel quel côté client
-//                .defaultSuccessUrl("/index.html");
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
-//
-//
-//    }
-
     @Override
     protected  void configure(HttpSecurity http) throws Exception{
         http.csrf()
