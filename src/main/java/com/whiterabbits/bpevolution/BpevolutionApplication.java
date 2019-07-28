@@ -6,6 +6,7 @@ import com.whiterabbits.bpevolution.dao.*;
 import com.whiterabbits.bpevolution.entities.*;
 import com.whiterabbits.bpevolution.utils.Display;
 import com.whiterabbits.bpevolution.utils.Reader;
+import com.whiterabbits.bpevolution.utils.Sort;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -99,7 +100,8 @@ public class BpevolutionApplication {
 
 		Display.multiplication(1);
 		Reader.readFile("C:\\Users\\BENNJ\\Projets\\Java\\Logs\\FileManagerFx\\app.log");
-
+		Sort.sortPairCroissantImpairDecroissant(new int[]{49,818,-282,900,928,281,-282,-1});
+		Sort.DataReverse(new int[]{1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,1,0,1,0,1,0});
 
 	}
 
